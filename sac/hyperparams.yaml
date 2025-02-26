@@ -1,0 +1,47 @@
+# General Hyperparameters
+seed: 123
+gamma: 0.99
+tau: 0.005  # Faster updates for small environments
+alpha: 0.2  # Initial entropy coefficient
+grad_clip: 1.0  # Clip gradients
+auto_alpha: True  # SAC learns α
+
+
+train:
+  batch_size: 128
+  start_steps: 50000  # Start learning earlier
+  max_steps: 1000000  # SAC should converge in ~300k steps
+  target_update_interval: 1  # Standard
+  log_interval: 2000  # Log less frequently for smoother updates
+  eval_interval: 50000  # Evaluate every 10k steps
+  num_eval_episodes: 200  # Evaluate over 10 episodes
+
+# Replay Buffer
+replay_buffer:
+  size: 1000000  # Keep buffer large for stability
+  device: "cpu"  # Can be "cpu" or "cuda"
+
+# Critic Network
+critic:
+  hidden_size: 128
+  num_hidden_layers: 3
+
+# Actor Network
+actor:
+  hidden_size: 128
+  num_hidden_layers: 3
+  policy_type: "Gaussian"
+
+# Optimizers
+optim:
+  actor: 
+    type: "Adam"
+    lr: 0.0003
+  critic: 
+    type: "Adam"
+    lr: 0.0003
+
+  alpha: 
+    type: "Adam"
+    lr: 0.0003
+
